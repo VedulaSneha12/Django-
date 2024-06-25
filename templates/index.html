@@ -17,19 +17,45 @@
         .navbar,
         .footer {
             background-color: #ff6600;
-            height:50px;
+            height: 50px;
         }
-        
-       ul{
-        display: flex;
-        gap:170px;
-        padding-top:15px;
-       }
-    
+
         .navbar-brand,
         .nav-link,
         .footer p {
             color: white !important;
+        }
+
+        .navbar-nav {
+            flex-direction: row;
+            align-items: center;
+            justify-content: flex-end;
+            width: 100%;
+        }
+
+        .nav-item {
+            margin-right: 15px;
+        }
+
+        @media (max-width: 991px) {
+            .navbar-nav {
+                flex-direction: column;
+                align-items: center;
+                width: 100%;
+            }
+
+            .nav-item {
+                width: 100%;
+                text-align: center;
+                margin-right: 0;
+                margin-bottom: 10px;
+            }
+        }
+
+        @media (max-width: 767px) {
+            .nav-item {
+                margin-bottom: 5px;
+            }
         }
 
         .hero-section {
@@ -394,11 +420,15 @@ button:hover {
                         <a class="nav-link" href="#services">Services</a>
                     </li>
                     <li class="nav-item">
+                        <a class="nav-link" href="{% url 'blogs' %}">Blogs</a>
+                    </li>
+                    <li class="nav-item">
                         <a class="nav-link" href="log">User Login</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="supervisor">Admin Login</a>
                     </li>
+
                 {% endif %}
             </ul>
         </div>
@@ -474,61 +504,54 @@ button:hover {
     </section>
     <!-- Main Course -->
         <title>Menu</title>
-        <div class="container">
-            <h1>Menu Items</h1>
-            {% if error_message %}
-                <p class="error">{{ error_message }}</p>
-            {% endif %}
-    
-            <form method="post" action="{% url 'menu_items' %}">
-                {% csrf_token %}
-                
-                <!-- Nav tabs -->
-                <ul class="nav nav-tabs" id="myTab" role="tablist">
-                    {% for category in categories %}
-                        <li class="nav-item" role="presentation">
-                            <button class="nav-link {% if forloop.first %}active{% endif %}" id="{{ category.name|slugify }}-tab" data-toggle="tab" data-target="#{{ category.name|slugify }}" type="button" role="tab"
-                                aria-controls="{{ category.name|slugify }}" aria-selected="{% if forloop.first %}true{% else %}false{% endif %}">{{ category.name }}</button>
-                        </li>
-                    {% endfor %}
-                </ul>
-    
-                <!-- Tab panes -->
-                <div class="tab-content">
-                    {% for category in categories %}
-                        <div class="tab-pane {% if forloop.first %}active{% endif %}" id="{{ category.name|slugify }}" role="tabpanel" aria-labelledby="{{ category.name|slugify }}-tab">
-                            {% if category.image %}
-                                <img src="{{ category.image.url }}" alt="{{ category.name }}" class="category-image">
-                            {% endif %}
-                            <div class="menu-items">
-                                {% for item in menu_items %}
-                                    {% if item.category.id == category.id %}
-                                        <div class="menu-item">
-                                            {% if item.image %}
-                                                <img src="{{ item.image.url }}" alt="{{ item.title }}" class="item-image">
-                                            {% else %}
-                                                <img src="{% static 'placeholder-image.jpg' %}" alt="Placeholder" class="item-image">
-                                            {% endif %}
-                                            <input type="checkbox" name="menu_items" value="{{ item.id }}">
-                                            <label>{{ item.title }} - ₹{{ item.price }}</label>
-                                            <input type="number" name="quantities" min="1" value="1" class="quantity">
-                                        </div>
-                                    {% endif %}
-                                {% endfor %}
-                            </div>
-                        </div>
-                    {% endfor %}
-                </div>
-            <form method="post" action="{% if user.is_authenticated or user.is_staff %} {% url 'menu_items' %} {% else %} {% url 'log' %} {% endif %}">
-                {% csrf_token %}
-                <button type="submit" class="order-button">Place Order</button>
-            </form>
-        </div>
-        <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
-        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-       <!-- signup/login -->
+        <h1>Menu Items</h1>
+    <div class="container">
+        <h1>Menu Items</h1>
+        {% if error_message %}
+            <p class="error">{{ error_message }}</p>
+        {% endif %}
+        <form method="post" action="{% if user.is_authenticated or user.is_staff %} {% url 'menu_items' %} {% else %} {% url 'log' %} {% endif %}">
+            {% csrf_token %}
+            <ul class="nav nav-tabs" id="myTab" role="tablist">
+                {% for category in categories %}
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link {% if forloop.first %}active{% endif %}" id="{{ category.name|slugify }}-tab" data-toggle="tab" data-target="#{{ category.name|slugify }}" type="button" role="tab"
+                            aria-controls="{{ category.name|slugify }}" aria-selected="{% if forloop.first %}true{% else %}false{% endif %}">{{ category.name }}</button>
+                    </li>
+                {% endfor %}
+            </ul>
 
+            <!-- Tab panes -->
+            <div class="tab-content">
+                {% for category in categories %}
+                    <div class="tab-pane {% if forloop.first %}active{% endif %}" id="{{ category.name|slugify }}" role="tabpanel" aria-labelledby="{{ category.name|slugify }}-tab">
+                        {% if category.image %}
+                            <img src="{{ category.image.url }}" alt="{{ category.name }}" class="category-image">
+                        {% endif %}
+                        <div class="menu-items">
+                            {% for item in menu_items %}
+                                {% if item.category.id == category.id %}
+                                    <div class="menu-item">
+                                        {% if item.image %}
+                                            <img src="{{ item.image.url }}" alt="{{ item.title }}" class="item-image">
+                                        {% else %}
+                                            <img src="{% static 'placeholder-image.jpg' %}" alt="Placeholder" class="item-image">
+                                        {% endif %}
+                                        <input type="checkbox" name="menu_items" value="{{ item.id }}">
+                                        <label>{{ item.title }} - ₹{{ item.price }}</label>
+                                        <input type="number" name="quantities" min="1" value="1" class="quantity">
+                                    </div>
+                                {% endif %}
+                            {% endfor %}
+                        </div>
+                    </div>
+                {% endfor %}
+            <button type="submit" class="order-button">Place Order</button>
+        </form>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
     <!-- Testimonials -->
     <section id="testimonials" class="testimonials bg-light">

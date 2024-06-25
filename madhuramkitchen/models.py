@@ -2,6 +2,7 @@ from django.db import models
 from django.contrib.auth.models import AbstractUser,User
 from phonenumber_field.modelfields import PhoneNumberField
 
+
 # Create your models here.
 
 class User(AbstractUser):
@@ -13,7 +14,7 @@ class Category(models.Model):
     description = models.TextField()
     image = models.ImageField(upload_to='pics/', null=True, blank=True)
 
-    def _str_(self):
+    def __str__(self):
         return self.name
 
 class MenuItem(models.Model):
@@ -22,7 +23,7 @@ class MenuItem(models.Model):
     price = models.DecimalField(max_digits=10, decimal_places=2)
     category = models.ForeignKey(Category, on_delete=models.CASCADE)
     image = models.ImageField(upload_to='menu_items/', null=True, blank=True)
-    def _str_(self):
+    def __str__(self):
             return self.title
 
     class Meta:
@@ -40,5 +41,13 @@ class OrderItem(models.Model):
     menu_item = models.ForeignKey(MenuItem, on_delete=models.CASCADE)
     quantity = models.PositiveIntegerField()
 
-    def _str_(self):
+    def __str__(self):
         return f"{self.quantity} x {self.menu_item.title}"
+    
+class Blog(models.Model):
+    title = models.CharField(max_length=200)
+    image=models.ImageField(upload_to='pics/',blank=True,null=True)
+    description=models.TextField()
+
+    def __str__(self):
+        return self.title

@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from .forms import CategoryForm, MenuItemForm
-from .models import Category, MenuItem, Order, OrderItem,User
+from .models import Category, MenuItem, Order, OrderItem,User,Blog
 from django.contrib import messages
 import datetime
 from decimal import Decimal
@@ -267,7 +267,7 @@ def order_successful(request):
         'user': user,
     })
     plain_message = strip_tags(html_message)
-    from_email = 'sneha2001vedula@gmail.com'
+    from_email = 'madhuramkitchens.com@gmail.com'
     to = user.email
 
     send_mail(subject, plain_message, from_email, [to], html_message=html_message)
@@ -280,7 +280,7 @@ def order_successful(request):
         'user': user,
     })
     plain_message_admin = strip_tags(html_message_admin)
-    to_admin = 'sneha2001vedula@gmail.com'  
+    to_admin = 'madhuramkitchens.com@gmail.com'  
 
     send_mail(subject_admin, plain_message_admin, from_email, [to_admin], html_message=html_message_admin)
 
@@ -294,22 +294,51 @@ def order_successful(request):
 
 
 
-# API Views
-from rest_framework import viewsets
-from .serializers import CategorySerializer, MenuItemSerializer, OrderSerializer, OrderItemSerializer
 
-class CategoryViewSet(viewsets.ModelViewSet):
-    queryset = Category.objects.all()
-    serializer_class = CategorySerializer
 
-class MenuItemViewSet(viewsets.ModelViewSet):
-    queryset = MenuItem.objects.all()
-    serializer_class = MenuItemSerializer
 
-class OrderViewSet(viewsets.ModelViewSet):
-    queryset = Order.objects.all()
-    serializer_class = OrderSerializer
+def create_blog(request):
+    if request.method == 'POST':
+        title = request.POST.get('title')
+        image = request.FILES.get('image')
+        description = request.POST.get('description')
 
-class OrderItemViewSet(viewsets.ModelViewSet):
-    queryset = OrderItem.objects.all()
-    serializer_class = OrderItemSerializer
+        blog = Blog(title=title, image=image, description=description)
+        blog.save()
+
+      
+        return redirect('blog_list')  # Redirect to the home page or blog list page
+
+    return render(request, 'create_blog.html')
+
+
+def blogs(request):
+    blogs=Blog.objects.all()
+    return render(request,'blogs.html',{'blogs':blogs})
+
+
+def blog_list(request):
+    blogs=Blog.objects.all()
+    return render(request,'blog_list.html',{'blogs':blogs})
+
+
+
+def edit_blog(request, blog_id):
+    blog = get_object_or_404(Blog, id=blog_id)
+
+    if request.method == 'POST':
+        blog.title = request.POST.get('title')
+        if request.FILES.get('image'):
+            blog.image = request.FILES.get('image')
+        blog.description = request.POST.get('description')
+        blog.save()
+
+    
+        return redirect('blog_list')
+
+    return render(request, 'edit_blog.html', {'blog': blog})
+
+def delete_blog(request, blog_id):
+    blog = get_object_or_404(Blog, id=blog_id)
+    blog.delete()
+    return redirect('blog_list')

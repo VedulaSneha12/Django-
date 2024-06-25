@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Blogs</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        h1 {
+            color: #333;
+            margin-bottom: 20px;
+        }
+        .blog-container {
+            background: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 800px;
+            margin-bottom: 20px;
+        }
+        .blog-container h2 {
+            color: #28a745;
+            margin-bottom: 10px;
+        }
+        .blog-container img {
+            display: block;
+            max-width: 200px;
+            margin-bottom: 10px;
+        }
+        .blog-container p {
+            margin-bottom: 15px;
+            line-height: 1.5;
+            color: #555;
+        }
+        .blog-container a {
+            color: #007bff;
+            text-decoration: none;
+            margin-right: 10px;
+        }
+        .blog-container a:hover {
+            text-decoration: underline;
+        }
+        .back-link {
+            margin-top: 20px;
+            color: #007bff;
+            text-decoration: none;
+        }
+        .back-link:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <h1>Blogs</h1>
+    {% for blog in blogs %}
+        <div class="blog-container">
+            <h2>{{ blog.title }}</h2>
+            {% if blog.image %}
+                <img src="{{ blog.image.url }}" alt="{{ blog.title }}">
+            {% else %}
+                <p>No image available</p>
+            {% endif %}
+            <p>{{ blog.description|safe }}</p>
+            <a href="{% url 'edit_blog' blog.id %}">Edit</a>
+            <a href="{% url 'delete_blog' blog.id %}">Delete</a>
+        </div>
+    {% endfor %}
+    <a href="{% url 'dashboard' %}" class="back-link">Go back to dashboard</a>
+</body>
+</html>

@@ -31,6 +31,8 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'ckeditor',
+    'ckeditor_uploader',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -146,13 +148,18 @@ AUTHENTICATION_BACKENDS = [
     
 ]  
 
-
-
-
+CKEDITOR_CONFIGS = {
+    'default': {
+        'toolbar': 'full',
+        'height': 300,
+        'width': 800,
+    },
+}
+CKEDITOR_UPLOAD_PATH = "uploads/"
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
-EMAIL_HOST_USER = 'sneha2001vedula@gmail.com'
-EMAIL_HOST_PASSWORD = 'xwzh wqdi osek mpfw'  
+EMAIL_HOST_USER = 'madhuramkitchens.com@gmail.com' # Environment variable for email username
+EMAIL_HOST_PASSWORD = 'smvh wwyx ewry mvtj' # Environment variable for email password
