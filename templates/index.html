@@ -9,21 +9,121 @@
     <title>Catering Service</title>
     <link rel="stylesheet" type="text/css" href="{% static 'menu_items.css' %}">
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
-        body {
-            font-family: Arial, sans-serif;
-        }
-
+        
+body {
+    font-family: 'Times New Roman', Times, serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f5f5f5;
+  }
+  .display-4{
+    font-size: 22px;
+  }
+  .logo {
+    font-weight: bolder;
+    margin-left: 40%;
+  }
+  .since {
+   bottom: 220px; 
+   right: 180px; 
+   font-size: 22px;
+   }
+   .since p{
+    color:orange;
+    }
+  
+  .hero-text h2 {
+    font-size: 36px;
+    margin-bottom: 20px;
+  }
+  
+  .hero-text h6 {
+    font-weight: bolder;
+  }
+  
+  .hero-text p {
+    font-size: 14px;
+    margin-bottom: 20px;
+  }
+  
+  .search-bar input {
+    border-radius: 5px 0 0 5px;
+  }
+  
+  .search-bar button {
+    border-radius: 0 5px 5px 0;
+    background-color: orangered;
+  }
+  
+  .popular-dishes h2 {
+    font-size: 36px;
+    margin-bottom: 40px;
+    margin-right: 70%;
+  }
+  
+  .rounded-pill{
+    width:50px;
+    height:30px;
+    margin-bottom: 20px;
+  }
+  
+  .icon-overlay {
+    position: absolute;
+    top: 2px;
+    right: 2px;
+    background-color: rgba(255, 255, 255, 0.8);
+    border-radius: 50%;
+    padding: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 30px;
+    height: 30px;
+    border: 1px solid #ff7e67;
+    cursor: pointer;
+  }
+  
+  .icon-overlay i {
+    color: #ff7e67;
+    font-size: 14px;
+  }
+  
+  .text-overlay {
+    text-align: left;
+  }
+  
+  .checked {
+    color: goldenrod;
+    font-size: 20px;
+  }
+  
+  .unchecked {
+    font-size: 20px;
+  }
+  
+  .img-fluid {
+    width: 140px;
+    height: 100px;
+  }
+  
+  
+  .card{
+    width:70%;
+    height:87%;
+  }
         .navbar,
         .footer {
-            background-color: #ff6600;
+           
             height: 50px;
         }
 
         .navbar-brand,
         .nav-link,
         .footer p {
-            color: white !important;
+            color: orangered;
         }
 
         .navbar-nav {
@@ -31,6 +131,7 @@
             align-items: center;
             justify-content: flex-end;
             width: 100%;
+            
         }
 
         .nav-item {
@@ -42,6 +143,7 @@
                 flex-direction: column;
                 align-items: center;
                 width: 100%;
+                
             }
 
             .nav-item {
@@ -49,16 +151,19 @@
                 text-align: center;
                 margin-right: 0;
                 margin-bottom: 10px;
+                
+                
             }
         }
 
         @media (max-width: 767px) {
             .nav-item {
                 margin-bottom: 5px;
+                
             }
         }
 
-        .hero-section {
+        <!-- .hero-section {
             background: url("{% static 'images/aritaku.png' %}") no-repeat center center/cover;
             height: 100vh;
             color: orange;
@@ -67,7 +172,7 @@
             align-items: center;
             text-align: center;
             background-position-y: 30px ;
-        }
+        } -->
 
         .about-us,
         .services,
@@ -386,7 +491,7 @@ button:hover {
 
     <!-- Navbar -->
     <nav class="navbar navbar-expand-lg navbar-light" style="position: fixed;width: 100%; z-index: 1;">
-        <a class="navbar-brand" href="#">Catering Service</a>
+        <!-- <a class="navbar-brand" href="#">Catering Service</a> -->
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
             aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -410,50 +515,51 @@ button:hover {
                             <a class="nav-link" href="logout">Logout</a>
                         </li>
                 {% else %}
-                    <li class="nav-item">
+                    <!-- <li class="nav-item">
                         <a class="nav-link" href="#contact">Contact</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#about-us">About Us</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#services">Services</a>
+                        <a class="nav-link" href="#services">Services</a> -->
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{% url 'blogs' %}">Blogs</a>
+                        <b><a class="nav-link" href="{% url 'blogs' %}">Blogs</a></b>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="log">User Login</a>
+                        <b><a class="nav-link" href="log">Login</a></b>
                     </li>
-                    <li class="nav-item">
+                    <button class="btn btn-dark">Choose Your Menu</button>
+                    <!-- <li class="nav-item">
                         <a class="nav-link" href="supervisor">Admin Login</a>
-                    </li>
+                    </li> -->
 
                 {% endif %}
             </ul>
         </div>
     </nav>
 
-    <!-- Hero Section -->
-    <div class="hero-section">
+    
+    <!-- <div class="hero-section">
         <div class="container1">
             <h1 class="display-4">Madhuram Kitchens</h1>
             <p class="lead">Making your events unforgettable</p>
-            <!-- <a href="#contact" class="btn btn-orange btn-lg">Get a Quote</a> -->
+            <a href="#contact" class="btn btn-orange btn-lg">Get a Quote</a> 
         </div>
-    </div>
+    </div> -->
 
     <!-- About Us -->
-    <section id="about-us" class="about-us">
+    <!-- <section id="about-us" class="about-us">
         <div class="container text-center">
             <h2 class="orange-text">About Us</h2>
             <p>We provide top-notch catering services for all occasions. Our team is dedicated to making your event
                 memorable with our delicious food and impeccable service.</p>
         </div>
-    </section>
+    </section> -->
 
     <!-- Services Offered -->
-    <section id="services" class="services bg-light">
+    <!-- <section id="services" class="services bg-light">
         <div class="container text-center">
             <h2 class="orange-text">Our Services</h2>
             <div class="row">
@@ -471,8 +577,153 @@ button:hover {
                 </div>
             </div>
         </div>
-    </section>
-
+    </section> -->
+    <header class="bg-white shadow-sm">
+        <div class="container d-flex justify-content-between align-items-center py-3">
+          <div class="logo">
+            <h4 class="m-0">Madhuram Kitchens</h4>
+          </div>
+          <!-- <nav>
+            <button class="btn btn-dark">Choose Your Menu</button>
+          </nav> -->
+        </div>
+      </header>
+      <main>
+        <section class="hero py-5 bg-white">
+          <div class="container">
+            <div class="row align-items-center">
+              <div class="col-md-6">
+                <div class="hero-text">
+                 <!-- <h6 style="font-family: cascadia code;">HARMONY HOUSE KITCHEN</h6> -->
+                  <h2 class="display-4">Taste Flavors <img src="https://media.cnn.com/api/v1/images/stellar/prod/140430115517-06-comfort-foods.jpg" class="rounded-pill mt-4"><br>
+                    from Around the
+                    <img src="https://media.cnn.com/api/v1/images/stellar/prod/140430115517-06-comfort-foods.jpg" class="rounded-pill mt-4">&nbsp;World</h2>
+                  <p><b>Harmony House Kitchen:</b> Where culinary excellence meets a symphony of flavors, creating a harmonious dining experience for every palate.</p>
+                  <div class="search-bar mt-4 d-flex">
+                    <input type="text" class="form-control" placeholder="What would you like to grab today?"><i class="bi bi-search" style="background-color:orangered;width:50px;padding-top:5px;padding-left:15px;color:white;"></i>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-6 d-flex flex-wrap ">
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSDmyEEYBblDYmgk0NkikPYi937na1us_3ehw&s.jpg" alt="Dish 1" class="img-fluid rounded m-2">
+                <img src="https://images2.minutemediacdn.com/image/upload/c_crop,w_2121,h_1193,x_0,y_96/c_fill,w_720,ar_16:9,f_auto,q_auto,g_auto/images/voltaxMediaLibrary/mmsport/mentalfloss/01g4n37sg242w38kxpt9.jpg" alt="Dish 2" class="img-fluid rounded m-2">
+                <img src="https://www.aladakshinapuramlo.com/wp-content/uploads/2023/04/pngaaa.com-4089625.png" alt="Dish 3" class="img-fluid rounded m-2" ">
+                <img src="https://st2.depositphotos.com/3591429/10531/i/950/depositphotos_105319422-stock-photo-people-enjoying-food.jpg" alt="Dish 4" class="img-fluid rounded m-2">
+                <img src="https://thearchitectsdiary.com/wp-content/uploads/2020/06/14-1024x686.jpg" alt="Dish 4" class="img-fluid rounded m-2">
+            </div>
+              <div class="since position-absolute text-muted">
+                <p>Since 1956</p>
+              </div>
+            </div>
+          </div>
+        </section>
+        <section class="popular-dishes py-5 bg-white text-center">
+          <div class="container">
+            <h2 class="display-4">Popular Dishes</h2>
+            <div class="row mt-4">
+              <div class="col-sm-6 col-md-3 mb-4">
+                <div class="card">
+                  <div class="card-body">
+                    <img
+                      src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRioe8S69GC2RBhvnc775gxA1RyPv42NnMx4A&s.jpg"
+                      alt="Mapo tofu" class="img-fluid rounded">
+                    <div class="icon-overlay" onclick="toggleHeart(this)"><i class="far fa-heart"></i></div>
+                    <p class="mt-2">Mapo tofu with ground beef spicy sauce korean</p>
+                  </div>
+                  <div class="card-footer" style="text-align: left;">
+                    <span class="fa fa-star checked"></span>
+                    <span class="fa fa-star checked"></span>
+                    <span class="fa fa-star checked"></span>
+                    <span class="fa fa-star checked"></span>
+                    <span class="fa fa-star checked"></span>
+                  </div>
+                </div>
+              </div>
+              <div class="col-sm-6 col-md-3 mb-4">
+                <div class="card">
+                  <div class="card-body">
+                    <img
+                      src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRTGVzzHkcKNEZEsFlals1Ja_VTWHjj6QcV4A&s.jpg"
+                      alt="French fries" class="img-fluid rounded">
+                    <div class="icon-overlay" onclick="toggleHeart(this)"><i class="far fa-heart"></i></div>
+                    <p class="mt-2">French fries with grilled chicken.</p>
+                  </div>
+                  <div class="card-footer" style="text-align: left;">
+                    <span class="fa fa-star checked"></span>
+                    <span class="fa fa-star checked"></span>
+                    <span class="fa fa-star checked"></span>
+                    <span class="fa fa-star checked"></span>
+                    <span class="fa fa-star checked"></span>
+                  </div>
+                </div>
+              </div>
+              <div class="col-sm-6 col-md-3 mb-4">
+                <div class="card">
+                  <div class="card-body">
+                    <img
+                      src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQqsBQG9AvSx5M6CpX6iC9dXvJIOpyGCnjPoQ&s.jpg"
+                      alt="Tagliatelle pasta" class="img-fluid rounded">
+                    <div class="icon-overlay" onclick="toggleHeart(this)"><i class="far fa-heart"></i></div>
+                    <p class="mt-2">Tagliatelle pasta with tomatoes and chicken</p>
+                  </div>
+                  <div class="card-footer" style="text-align: left;">
+                    <span class="fa fa-star checked"></span>
+                    <span class="fa fa-star checked"></span>
+                    <span class="fa fa-star checked"></span>
+                    <span class="fa fa-star checked"></span>
+                    <span class="fa fa-star checked"></span>
+                  </div>
+                </div>
+              </div>
+              <div class="col-sm-6 col-md-3 mb-4">
+                <div class="card">
+                  <div class="card-body">
+                    <img
+                      src="https://img.freepik.com/premium-photo/closeup-shot-tasty-shrimp-tempura-with-sauce-white-background_181624-60353.jpg"
+                      alt="Tasty shrimp tempura" class="img-fluid rounded">
+                    <div class="icon-overlay" onclick="toggleHeart(this)"><i class="far fa-heart"></i></div>
+                    <p class="mt-2">Tasty shrimp tempura with sauce</p>
+                  </div>
+                  <div class="card-footer" style="text-align: left;">
+                    <span class="fa fa-star checked"></span>
+                    <span class="fa fa-star checked"></span>
+                    <span class="fa fa-star checked"></span>
+                    <span class="fa fa-star checked"></span>
+                    <span class="fa fa-star checked"></span>
+                  </div>
+          
+        </section>
+    
+        <!-- New Section -->
+        <section class="special-offer bg-light container">
+          <div class="container">
+            <div class="row align-items-center">
+              <div class="col-sm-4 text-center" style="height:300px;">
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR9xUmRoJp0q9VQF3RvIX8o7RIQvmehhEaNtQ&s.jpg"style="width:180px;height:280px;margin-top:40px;" alt="Special Dish" class="img-fluid rounded">
+              </div>
+              <div class="col-sm-4" style="height:300px;">
+                <h6 style="margin-right:160px;font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif">About Madhuram Kitchens</h6>
+                <h5 class="display-4">The Healthy Food For Wealthy Mood</h5>
+                <p>Experience the best of our kitchen with our special offer dishes, crafted to perfection for you.</p>
+                
+                <button class="btn border rounded-pill" style="float: left;width:150px;height:30px;text-align:center;">Location</button>
+                <button class="btn border rounded-pill" style="float: right;width:150px;height:30px;text-align:center;">Location</button>
+                <br><br>
+                <button class="btn border rounded-pill" style="float: left;width:150px;height:30px;text-align:center;">Location</button>
+                <button class="btn border rounded-pill" style="float: right;width:150px;height:30px;text-align:center;">Location</button>
+                <br><br>
+                <button class="btn bg-dark text-light border rounded-pill" style="width:150px;height:40px;text-align:center;">Upgrade Order</button>
+              </div>
+              <div class="col-sm-4 " style="height:300px;">
+                <img src="https://akm-img-a-in.tosshub.com/lingo/styles/medium_crop_simple/public/images/story/202401/untitled_design_2_0.jpg" alt="Dish 1" class="img-fluid rounded m-2" style="height:125px;float:right;padding-left: 40px;width:200px"><br>
+                <img src="https://www.dorsey.edu/wp-content/uploads/2023/05/what-is-culinary-arts.jpg" alt="Dish 2" class="img-fluid rounded m-2" style="padding-right: 20px;height:170px;width:250px">
+              </div>
+            </div>
+          </div>
+        </section>
+    
+      </main>
+    
     <!-- Featured Menu -->
     <section id="menu" class="menu">
         <div class="container text-center">
@@ -633,6 +884,18 @@ button:hover {
             }
         }
     </script>
+    <script>
+        function toggleHeart(element) {
+          const icon = element.querySelector('i');
+          if (icon.classList.contains('far')) {
+            icon.classList.remove('far');
+            icon.classList.add('fas');
+          } else {
+            icon.classList.remove('fas');
+            icon.classList.add('far');
+          }
+        }
+      </script>
 </body>
 
 </html>
