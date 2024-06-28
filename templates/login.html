@@ -3,6 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <title>Login</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -87,6 +89,16 @@
 </head>
 <body>
     <div class="login-container">
+        {% if messages %}
+            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                {% for message in messages %}
+                    {{ message }}
+                {% endfor %}
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+        {% endif %}
         <h2>Login</h2>
         <form method="POST" action="{% url 'log' %}">
             {% csrf_token %}
@@ -105,18 +117,15 @@
 
             <button type="submit">Login</button>
         </form>
-        <form action="signup">
-        <button class="signup-button" >Sign Up</button>
+        <form action="{% url 'signup' %}">
+            <button class="signup-button">Sign Up</button>
         </form>
-        <!-- template.html -->
-    <div>
-        {% if messages %}
-            <ul>
-                {% for message in messages %}
-                    <li>{{ message }}</li>
-                {% endfor %}
-            </ul>
-        {% endif %}
+        
     </div>
+
+    <!-- Bootstrap JS and dependencies -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 </html>

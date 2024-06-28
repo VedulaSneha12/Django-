@@ -4,98 +4,116 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Registration</title>
-</head>
-<style>
-    body {
+    <!-- Bootstrap CSS -->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
             font-family: Arial, sans-serif;
-            background-color: #f0f2f5;
+            background-color: #f8f9fa;
             display: flex;
             justify-content: center;
             align-items: center;
             height: 100vh;
             margin: 0;
-            background-color:lightgray;
         }
-        form {
-            background-color: #fff;
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
             padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            width: 100%;
-            max-width: 400px;
-            display: flex;
-            flex-direction: column;
-            width:1200px;
-            padding-top: 50px;
-            margin-left: 300px;
-            background-color:lightyellow;
         }
-        input[type="text"], input[type="number"], input[type="password"] {
-            width: 350px;
-            padding: 10px;
-            margin: 2px 0;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-            font-size: 14px;
+        .card {
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            background-color: #fff;
         }
-        input[type="text"]:focus, input[type="number"]:focus, input[type="password"]:focus {
-            border-color: #007bff;
-            box-shadow: 0 0 5px rgba(0, 123, 255, 0.25);
-            outline: none;
-        }
-        input[type="submit"] {
-            width: 200px;
-            padding: 10px;
+        .card-header {
             background-color: orangered;
-            border: none;
-            border-radius: 4px;
             color: #fff;
-            font-size: 16px;
-            cursor: pointer;
-            transition: background-color 0.3s;
-            margin-left: 70px;
-        }
-        input[type="submit"]:hover {
-            background-color: #0056b3;
-        }
-        h2 {
-            color: orangered;
-            padding: 10px;
-            margin: 10px 0;
             text-align: center;
-            margin-right: 20px;
+            font-size: 24px;
+            padding: 15px;
+            border-radius: 10px 10px 0 0;
+        }
+        .form-group label {
+            font-weight: bold;
+        }
+        .form-control {
+            border-radius: 5px;
+        }
+        .btn-custom {
+            background-color: orangered;
+            color: #fff;
+            border-radius: 5px;
+        }
+        .btn-custom:hover {
+            background-color: #d9534f;
+            border-color: #d43f3a;
         }
         .messages {
-            width: 100%;
-            max-width: 400px;
-            margin-top: 350px;
+            margin-top: 20px;
         }
-</style>
+        .alert-dismissible .close {
+            position: relative;
+            top: -10px;
+            right: -10px;
+        }
+    </style>
+</head>
 <body>
-    <form action ="signup" method="post">
-        {% csrf_token %}
-        <h2><b>Signup Form</b></h2>
-        <label for="first_name">First Name:</label>
-        <input type="text" name ="first_name" placeholder="First Name"><br>
-        <label for="last_name">Last Name:</label>
-        <input type="text" name ="last_name" placeholder="Last Name"><br>
-        <label for="username">Username:</label>
-        <input type="text" name ="username" placeholder="Username"><br>
-        <label for="mobile_number">Mobile Number:</label>
-        <input type="text" name="phone_number" placeholder="Phone Number (10 digits)" pattern="\d{10}" title="Please enter a 10-digit phone number" required><br>
-        <label for ="email">Email:</label>
-        <input type="email" name="email" placeholder="enter your email" required><br>
-        <label for="password">Password:</label>
-        <input type="password" name ="password1" placeholder="Password"><br>
-        <label for="confirm_password">Confirm_password:</label>
-        <input type="password" name ="password2" placeholder="Confirm Password"><br>
-        <input type="submit" value="Signup">
-
-    </form>
-    <div class="messages">
-        {% for message in messages %}
-        <h3> {{message}} </h3>
-        {% endfor %}
+    <div class="container">
+        <div class="card">
+            <div class="card-header">
+                <b>Signup Form</b>
+            </div>
+            <div class="card-body">
+                <div class="messages">
+                    {% if messages %}
+                        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                            {% for message in messages %}
+                                {{ message }}
+                            {% endfor %}
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                    {% endif %}
+                </div>
+                <form action="{% url 'signup' %}" method="post">
+                    {% csrf_token %}
+                    <div class="form-group">
+                        <label for="first_name">First Name:</label>
+                        <input type="text" class="form-control" id="first_name" name="first_name" placeholder="Full Name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="username">Username:</label>
+                        <input type="text" class="form-control" id="username" name="username" placeholder="Username" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="phone_number">Mobile Number:</label>
+                        <input type="text" class="form-control" id="phone_number" name="phone_number" placeholder="Phone Number (10 digits)" pattern="\d{10}" title="Please enter a 10-digit phone number" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email:</label>
+                        <input type="email" class="form-control" id="email" name="email" placeholder="Enter your email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="password1">Password:</label>
+                        <input type="password" class="form-control" id="password1" name="password1" placeholder="Password" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="password2">Confirm Password:</label>
+                        <input type="password" class="form-control" id="password2" name="password2" placeholder="Confirm Password" required>
+                    </div>
+                    <button type="submit" class="btn btn-custom btn-block">Signup</button>
+                </form>
+            </div>
+        </div>
     </div>
+
+    <!-- Bootstrap JS and dependencies -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 </html>

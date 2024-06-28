@@ -15,11 +15,17 @@ class CategoryForm(forms.ModelForm):
 class MenuItemForm(forms.ModelForm):
     class Meta:
         model = MenuItem
-        fields = ['title', 'description', 'price', 'image','category']
+        fields = ['dish_name','dish_type','description', 'price', 'category', 'image']
 
     def clean_title(self):
-        title = self.cleaned_data.get('title')
+        dish_name = self.cleaned_data.get('dish_name')
         category = self.cleaned_data.get('category')
-        if MenuItem.objects.filter(title=title, category=category).exists():
+        if MenuItem.objects.filter(dish_name=dish_name, category=category).exists():
             raise forms.ValidationError("Menu item with this title already exists in this category.")
-        return title
+        return dish_name
+         
+    def clean_dish_type(self):
+        dish_type = self.cleaned_data.get('dish_type')
+        if dish_type not in ['veg', 'non_veg', 'green_leafy']:
+            raise forms.ValidationError("Invalid dish type.")
+        return dish_type

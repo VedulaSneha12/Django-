@@ -28,5 +28,5 @@ admin.site.register(Order)
 admin.site.register(OrderItem)
 @admin.register(MenuItem)
 class MenuItemAdmin(admin.ModelAdmin):
-    list_display = ('title', 'price', 'category')
+    list_display = ('dish_name', 'price', 'category')
 admin.site.register(User, UserAdmin)

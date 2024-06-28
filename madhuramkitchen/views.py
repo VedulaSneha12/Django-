@@ -94,7 +94,6 @@ def supervisor(request):
 def signup(request):
     if request.method == 'POST':
         first_name = request.POST['first_name']
-        last_name = request.POST['last_name']
         phone_number = request.POST['phone_number']
         username = request.POST['username']
         email = request.POST['email']
@@ -116,7 +115,6 @@ def signup(request):
                 phone_number=phone_number,
                 password=password1,
                 first_name=first_name,
-                last_name=last_name,
                 email=email,
                 username=username
             )
@@ -213,7 +211,7 @@ def menu_items(request):
                     total_price += item_total_price
                     order_items.append({
                         'menu_item_id': item.id,
-                        'menu_item_title': item.title,
+                        'menu_item_dish_name': item.dish_name,
                         'quantity': quantity,
                         'price': float(item_total_price)
                     })
